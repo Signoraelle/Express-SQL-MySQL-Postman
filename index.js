@@ -72,3 +72,24 @@ connection.query('UPDATE movie SET ? WHERE id = ?', [formData, idMovies], err =>
   }
 })
 })
+
+// DELETE METHODE
+// listen to the url "/api/employees" with the verb DELETE
+
+app.delete('/api/movies/:id', (req, res) => {
+
+  // Get the data sent
+  const idMovies = req.params.id;
+
+  // connection to the database, and insert the employee
+  connection.query('DELETE FROM movie WHERE id = ?', [idMovies], err => {
+    if (err) {
+      // If an error has occurred, then the user is informed of the error
+       console.log(err);
+      res.status(500).send("Error deleting an employee");
+    } else {
+      // If everything went well, we send a status "ok".
+      res.sendStatus(200);
+    }
+  });
+});
