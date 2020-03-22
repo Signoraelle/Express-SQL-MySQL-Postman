@@ -55,8 +55,8 @@ connection.query('INSERT INTO movie SET ?', formData, (err, results) => {
   } else {
     res.sendStatus(200);
   }
-})  
-})
+});  
+});
 
 // PUT METHODE
 
@@ -70,8 +70,8 @@ connection.query('UPDATE movie SET ? WHERE id = ?', [formData, idMovies], err =>
   } else {
     res.sendStatus(200);
   }
-})
-})
+});
+});
 
 // DELETE METHODE
 // listen to the url "/api/employees" with the verb DELETE
