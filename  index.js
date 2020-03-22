@@ -1,15 +1,33 @@
-const connection = require("./conf");
+//const connection = require("./conf");
 
-// listen to "/api/employees"
-app.get("/api/employees", (req, res) => {
-  // connection to the database, and selection of employees
-  connection.query("SELECT * from employee", (err, results) => {
+const bodyParser = require("body-parser");
+// Data stored in req.body
+const formData = req.body;
+// TODO saves data in the table (step 3)
+
+// Support JSON-encoded bodies
+app.use(bodyParser.json());
+// Support URL-encoded bodies
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
+// listen to the url "/api/employees" with the verb POST
+app.post("/api/MOVIE", (req, res) => {
+  // Get the data sent
+  const formData = req.body;
+
+  // connection to the database, and insertion of the employee
+  connection.query("INSERT INTO MOVIE  SET ?", formData, (err, results) => {
     if (err) {
-      //  If an error has occurred, then the user is informed of the error
-      res.status(500).send("Erreur lors de la récupération des employés");
+      // If an error has occurred, then the user is informed of the error
+      console.log(err);
+      res.status(500).send("Error saving an employee");
     } else {
-      // If everything went well, we send the result of the SQL query as JSON.
-      res.json(results);
+      // If everything went well, we send a status "ok".
+      res.sendStatus(200);
     }
   });
 });
